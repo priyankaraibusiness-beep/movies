@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- SEO META -->
+<title>MovieFlix – Browse Movies by Genre, Language & Year</title>
+<meta name="description" content="Discover movies by genre, language, and year. A fast, responsive, SEO-optimized movies website with AdSense monetization.">
+<meta name="keywords" content="movies, online movies, action movies, drama movies, movie website">
+<meta name="author" content="MovieFlix">
+
+<!-- Google AdSense (Replace ca-pub-XXXXXXX) -->
+<script async
+src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXX"
+crossorigin="anonymous"></script>
+
+<style>
+/* ===== GLOBAL ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #111;
+    color: #fff;
+    line-height: 1.6;
+}
+
+/* ===== HEADER ===== */
+header {
+    background: #e50914;
+    padding: 20px;
+    text-align: center;
+}
+header h1 {
+    font-size: 2rem;
+}
+header p {
+    font-size: 1rem;
+}
+
+/* ===== LAYOUT ===== */
+.container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+}
+
+/* ===== FILTERS ===== */
+.filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+.filters select {
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    font-size: 1rem;
+}
+
+/* ===== MOVIES GRID ===== */
+.movies-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+}
+.movie-card {
+    background: #222;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s;
+}
+.movie-card:hover {
+    transform: scale(1.05);
+}
+.movie-card img {
+    width: 100%;
+    height: 280px;
+    object-fit: cover;
+}
+.movie-info {
+    padding: 10px;
+}
+.movie-info h3 {
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+}
+.movie-info p {
+    font-size: 0.9rem;
+    color: #ccc;
+}
+
+/* ===== ADS ===== */
+.ad-container {
+    margin: 30px 0;
+    text-align: center;
+    background: #000;
+    padding: 10px;
+}
+
+/* ===== FOOTER ===== */
+footer {
+    background: #000;
+    text-align: center;
+    padding: 15px;
+    margin-top: 30px;
+    font-size: 0.9rem;
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 600px) {
+    header h1 {
+        font-size: 1.5rem;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>🎬 MovieFlix</h1>
+    <p>Browse movies by genre, language & year</p>
+</header>
+
+<!-- TOP AD -->
+<div class="ad-container">
+    <ins class="adsbygoogle"
+        style="display:block"
+        data-ad-client="ca-pub-XXXXXXXXXXXX"
+        data-ad-slot="1111111111"
+        data-ad-format="auto"
+        data-full-width-responsive="true"></ins>
+</div>
+
+<main class="container">
+
+    <!-- FILTERS -->
+    <section class="filters">
+        <select id="genreFilter">
+            <option value="all">All Genres</option>
+            <option value="action">Action</option>
+            <option value="drama">Drama</option>
+            <option value="comedy">Comedy</option>
+        </select>
+
+        <select id="languageFilter">
+            <option value="all">All Languages</option>
+            <option value="english">English</option>
+            <option value="hindi">Hindi</option>
+            <option value="tamil">Tamil</option>
+        </select>
+
+        <select id="yearFilter">
+            <option value="all">All Years</option>
+            <option value="2024">2024</option>
+            <option value="2023">2023</option>
+            <option value="2022">2022</option>
+        </select>
+    </section>
+
+    <!-- MOVIES -->
+    <section id="moviesGrid" class="movies-grid"></section>
+
+    <!-- MID AD -->
+    <div class="ad-container">
+        <ins class="adsbygoogle"
+            style="display:block"
+            data-ad-client="ca-pub-XXXXXXXXXXXX"
+            data-ad-slot="2222222222"
+            data-ad-format="rectangle"></ins>
+    </div>
+
+</main>
+
+<footer>
+    © 2025 MovieFlix | SEO Optimized Movies Website
+</footer>
+
+<script>
+/* ===== MOVIE DATA ===== */
+const movies = [
+    {
+        title: "Action Blast",
+        genre: "action",
+        language: "english",
+        year: "2024",
+        poster: "https://via.placeholder.com/300x450?text=Action+Movie"
+    },
+    {
+        title: "Drama Queen",
+        genre: "drama",
+        language: "hindi",
+        year: "2023",
+        poster: "https://via.placeholder.com/300x450?text=Drama+Movie"
+    },
+    {
+        title: "Comedy Nights",
+        genre: "comedy",
+        language: "tamil",
+        year: "2022",
+        poster: "https://via.placeholder.com/300x450?text=Comedy+Movie"
+    }
+];
+
+/* ===== FILTER LOGIC ===== */
+const grid = document.getElementById("moviesGrid");
+const genreFilter = document.getElementById("genreFilter");
+const languageFilter = document.getElementById("languageFilter");
+const yearFilter = document.getElementById("yearFilter");
+
+function renderMovies() {
+    grid.innerHTML = "";
+
+    const filteredMovies = movies.filter(movie =>
+        (genreFilter.value === "all" || movie.genre === genreFilter.value) &&
+        (languageFilter.value === "all" || movie.language === languageFilter.value) &&
+        (yearFilter.value === "all" || movie.year === yearFilter.value)
+    );
+
+    filteredMovies.forEach(movie => {
+        const card = document.createElement("div");
+        card.className = "movie-card";
+        card.innerHTML = `
+            <img src="${movie.poster}" alt="${movie.title}">
+            <div class="movie-info">
+                <h3>${movie.title}</h3>
+                <p>${movie.genre.toUpperCase()} | ${movie.language}</p>
+                <p>Year: ${movie.year}</p>
+            </div>
+        `;
+        grid.appendChild(card);
+    });
+}
+
+genreFilter.addEventListener("change", renderMovies);
+languageFilter.addEventListener("change", renderMovies);
+yearFilter.addEventListener("change", renderMovies);
+
+renderMovies();
+
+/* ===== ADSENSE INIT ===== */
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+</body>
+</html>
